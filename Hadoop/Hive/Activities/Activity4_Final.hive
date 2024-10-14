@@ -1,0 +1,4 @@
+CREATE TABLE files3 (line STRING);
+LOAD DATA LOCAL INPATH '/root/file01.txt' INTO TABLE files3;
+CREATE TABLE word_counts3 AS SELECT word, count(1) AS count FROM (SELECT explode(split(line, ' ')) AS word FROM files3) w GROUP BY word ORDER BY count desc;
+SELECT * FROM word_counts3;
